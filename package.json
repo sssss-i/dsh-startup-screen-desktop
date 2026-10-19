@@ -1,0 +1,55 @@
+{
+  "name": "dsh-startup-screen",
+  "version": "1.2.0",
+  "description": "DSH Desktop 启动界面与启动动画插件（桌面端适配版）：六幕开机序列、中文主字 + 英文等宽副标题、真声素材与界面音效、可交互访问授权；30 余项参数可在 DSH 设置页「启动动画」实时修改。",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "deepseek-harness-desktop",
+    "startup",
+    "splash",
+    "boot-animation",
+    "electron"
+  ],
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "desktop",
+    "cordis.patch.yml",
+    "README.md",
+    "DESKTOP-ADAPT.md",
+    "DESKTOP.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node desktop/audit-desktop.mjs",
+    "audit": "node desktop/audit-desktop.mjs",
+    "check-install": "node desktop/install-desktop.mjs --check",
+    "install-desktop": "node desktop/install-desktop.mjs"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "author": "沈宏宏",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-settings"
+      ],
+      "platform": "web"
+    }
+  },
+  "//": "维护者注意：(1) dsh.client.platform 必须保持字符串 \"web\"——dsh-client-modules/lib/index.js:714 用 `decl.platform !== \"web\"` 判定是否加载客户端模块，桌面端与 Web 共用该取值，不能改成 \"desktop\"；(2) 上传 GitHub 后可在本文件补 repository / homepage / bugs 字段（本仓库刻意留空，避免写成错误仓库或死链）；(3) 设置页「启动动画」分区由 @deepseek-ai/dsh-client-ui-settings-general 提供的 settings.section list 槽承载，与 ui-settings 的 config.enabled（仅「开发者工具」偏好）无关。"
+}

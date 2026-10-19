@@ -1,0 +1,17 @@
+# dsh-startup-screen — DSH bundle patch（Desktop 版）
+#
+# 把插件的 Host 半侧挂进当前 profile 的配置树；客户端半侧由 package.json 的
+# dsh.client 声明，宿主自动组装 bundle，这里不用写。
+#
+# 桌面端安装（推荐，纯文件、零依赖、不改内核）：
+#   node desktop/install-desktop.mjs
+# 桌面端卸载：
+#   node desktop/install-desktop.mjs --uninstall
+#
+# 手工等价操作 = 两件事：
+#   1) 把本包整体复制到 <profile>/node_modules/dsh-startup-screen/
+#   2) 在 <profile>/package.json 的 dsh.profile.bundles 末尾追加 "dsh-startup-screen"
+# 不需要 `dsh plugin add`，也不需要 pnpm install（本包零依赖）。
+- insert:
+    - id: dsh-startup-screen
+      name: dsh-startup-screen
